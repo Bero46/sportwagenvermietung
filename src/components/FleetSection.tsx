@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronLeft, ChevronRight, Fuel, Gauge, Users, X, Calendar, Shield, Route } from "lucide-react";
 
 import bmwM4Cabrio1 from "@/assets/bmw-m4-cabrio-1.jpg";
+import bmwM4Cabrio3 from "@/assets/bmw-m4-cabrio-3.jpg";
 import mercedesC63_1 from "@/assets/mercedes-c63-1.jpg";
 import mercedesC63_2 from "@/assets/mercedes-c63-2.jpg";
 import bmwM4CoupeGelb from "@/assets/bmw-m4-coupe-gelb.jpg";
@@ -17,7 +18,7 @@ const vehicles = [
     priceDay: "249€",
     priceWeekend: "329€",
     weekendDeal: "699€ Fr–So (450 km frei)",
-    images: [bmwM4Cabrio1],
+    images: [bmwM4Cabrio1, bmwM4Cabrio3],
     tags: ["530 PS", "Allrad", "Cabrio", "Automatik"],
     specs: [
       { icon: Gauge, value: "530 PS" },
