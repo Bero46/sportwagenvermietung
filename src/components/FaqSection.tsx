@@ -9,23 +9,35 @@ import {
 const faqs = [
   {
     question: "Wie läuft die Anfrage ab?",
-    answer: "Du sendest eine Anfrage, wir prüfen Verfügbarkeit und melden uns schnell mit Preis & Bestätigung.",
+    answer: "Du sendest eine Anfrage über unser Formular oder WhatsApp. Wir prüfen die Verfügbarkeit und melden uns schnell mit Preis & Bestätigung zurück.",
   },
   {
-    question: "Gibt es eine Kaution?",
-    answer: "Ja, je nach Fahrzeug. Details bekommst du transparent vor der Bestätigung.",
+    question: "Wie hoch ist die Kaution?",
+    answer: "Die Kaution beträgt 2.500€ und kann bar oder per EC-Karte hinterlegt werden. Eine Kreditkarte ist nicht erforderlich.",
   },
   {
-    question: "Welche Unterlagen brauche ich?",
-    answer: "Gültiger Führerschein und Ausweis. Weitere Infos je nach Fahrzeugklasse.",
+    question: "Wie viele Freikilometer sind inklusive?",
+    answer: "Bei den Sportwagen sind 150 km pro Tag inklusive, beim VW Grand California Camper 250 km. Zusätzliche Kilometer kosten 1,50€. Du kannst Zusatzkilometer vorab günstiger dazubuchen.",
+  },
+  {
+    question: "Wie alt muss ich sein?",
+    answer: "Das Mindestalter zum Mieten beträgt 21 Jahre. Ein gültiger Führerschein und Ausweis werden benötigt.",
+  },
+  {
+    question: "Sind die Fahrzeuge versichert?",
+    answer: "Ja, alle Fahrer und Fahrzeuge sind vollkasko versichert. Du bist rundum abgesichert.",
+  },
+  {
+    question: "Was kosten die Fahrzeuge?",
+    answer: "Unter der Woche (Mo–Do) 249€/Tag, am Wochenende (Fr–So) 329€/Tag. Unser Wochenend-Deal: Freitag bis Sonntag für 699€ inkl. 450 Freikilometer. Camper-Preise auf Anfrage.",
+  },
+  {
+    question: "Wo findet die Übergabe statt?",
+    answer: "In NRW – je nach Fahrzeug und Absprache, z.B. Köln, Düsseldorf, Leverkusen, Monheim oder Bonn.",
   },
   {
     question: "Kann ich stornieren?",
     answer: "Je nach Zeitpunkt ist eine kostenfreie Stornierung möglich. Wir klären das fair im Angebot.",
-  },
-  {
-    question: "Wo findet die Übergabe statt?",
-    answer: "In NRW – je nach Fahrzeug und Absprache (z.B. Köln, Düsseldorf, Monheim).",
   },
 ];
 

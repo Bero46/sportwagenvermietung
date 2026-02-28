@@ -1,11 +1,41 @@
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
 
 const stats = [
-  { value: "Premium", label: "Fahrzeuge" },
-  { value: "NRW", label: "Standorte" },
-  { value: "24/7", label: "Erreichbarkeit" },
-  { value: "Schnell", label: "Rückmeldung" },
+  { value: 500, suffix: "+", label: "zufriedene Fahrten" },
+  { value: 4, suffix: "", label: "Premium Fahrzeuge" },
+  { value: 7, suffix: "+", label: "Standorte in NRW" },
+  { value: 100, suffix: "%", label: "Vollkasko versichert" },
 ];
+
+const AnimatedNumber = ({ target, suffix }: { target: number; suffix: string }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+    let start = 0;
+    const duration = 1500;
+    const step = Math.ceil(target / (duration / 16));
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= target) {
+        setCount(target);
+        clearInterval(timer);
+      } else {
+        setCount(start);
+      }
+    }, 16);
+    return () => clearInterval(timer);
+  }, [isInView, target]);
+
+  return (
+    <span ref={ref} className="text-3xl sm:text-4xl font-display font-bold text-gradient">
+      {count}{suffix}
+    </span>
+  );
+};
 
 const StatsSection = () => (
   <section className="py-16 border-y border-border bg-card/50">
@@ -20,10 +50,8 @@ const StatsSection = () => (
             transition={{ delay: i * 0.1 }}
             className="text-center"
           >
-            <p className="text-2xl sm:text-3xl font-display font-bold text-gradient mb-1">
-              {stat.value}
-            </p>
-            <p className="text-sm text-muted-foreground">{stat.label}</p>
+            <AnimatedNumber target={stat.value} suffix={stat.suffix} />
+            <p className="text-sm text-muted-foreground mt-1">{stat.label}</p>
           </motion.div>
         ))}
       </div>
