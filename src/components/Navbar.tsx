@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import logo from "@/assets/logo-zb-rental.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const navLinks = [
     { label: "Fahrzeuge", href: "#fahrzeuge" },
@@ -14,40 +22,46 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 glass">
-      <div className="container mx-auto flex items-center justify-between h-16 px-4 lg:px-8">
+    <motion.nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? "top-3 left-4 right-4 mx-auto max-w-5xl rounded-2xl glass shadow-glow"
+          : "glass"
+      }`}
+      layout
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+    >
+      <div className="flex items-center justify-between h-14 px-4 lg:px-6">
         <Link to="/" className="flex items-center gap-2">
-          <span className="text-2xl font-display font-bold tracking-tight">
-            ZB<span className="text-gradient">-Rental</span>
-          </span>
+          <img src={logo} alt="ZB-Rental Logo" className="h-8 w-auto" />
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-secondary-foreground hover:text-foreground transition-colors"
+              className="text-sm font-medium text-secondary-foreground hover:text-primary transition-colors"
             >
               {link.label}
             </a>
           ))}
         </div>
 
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-3">
           <a
             href="tel:+491749994777"
             className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             <Phone className="h-4 w-4" />
-            +49 174 999 4777
+            <span className={scrolled ? "hidden lg:inline" : ""}>+49 174 999 4777</span>
           </a>
           <a
             href="#kontakt"
-            className="inline-flex items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
+            className="inline-flex items-center justify-center rounded-xl bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
           >
-            Anfrage stellen
+            Anfrage
           </a>
         </div>
 
@@ -68,9 +82,9 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass border-t border-border"
+            className="md:hidden border-t border-border"
           >
-            <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
+            <div className="px-4 py-6 flex flex-col gap-4">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
@@ -91,7 +105,7 @@ const Navbar = () => {
               <a
                 href="#kontakt"
                 onClick={() => setIsOpen(false)}
-                className="inline-flex items-center justify-center rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground"
+                className="inline-flex items-center justify-center rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground"
               >
                 Anfrage stellen
               </a>
@@ -99,7 +113,7 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 };
 

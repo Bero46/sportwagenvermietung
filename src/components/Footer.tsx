@@ -1,15 +1,13 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin } from "lucide-react";
+import logo from "@/assets/logo-zb-rental.png";
 
 const Footer = () => (
-  <footer id="kontakt" className="border-t border-border bg-card/50 pt-16 pb-8">
+  <footer className="border-t border-border bg-card/50 pt-16 pb-8">
     <div className="container mx-auto px-4">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-        {/* Brand */}
         <div>
-          <span className="text-2xl font-display font-bold tracking-tight mb-4 block">
-            ZB<span className="text-gradient">-Rental</span>
-          </span>
+          <img src={logo} alt="ZB-Rental Logo" className="h-10 w-auto mb-4" />
           <p className="text-sm text-muted-foreground mb-4">
             Premium Fahrzeugvermietung in NRW. Sportwagen & Camper – unkompliziert und professionell.
           </p>
@@ -20,7 +18,6 @@ const Footer = () => (
           </p>
         </div>
 
-        {/* Kontakt */}
         <div>
           <h3 className="text-sm font-display font-semibold uppercase tracking-widest text-foreground mb-4">
             Kontakt
@@ -28,14 +25,12 @@ const Footer = () => (
           <ul className="space-y-3">
             <li>
               <a href="tel:+491749994777" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors">
-                <Phone className="h-4 w-4 text-primary" />
-                +49 174 999 4777
+                <Phone className="h-4 w-4 text-primary" /> +49 174 999 4777
               </a>
             </li>
             <li>
               <a href="mailto:Info@ZB-Rental.de" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors">
-                <Mail className="h-4 w-4 text-primary" />
-                Info@ZB-Rental.de
+                <Mail className="h-4 w-4 text-primary" /> Info@ZB-Rental.de
               </a>
             </li>
             <li className="flex items-start gap-3 text-sm text-muted-foreground">
@@ -45,27 +40,13 @@ const Footer = () => (
           </ul>
         </div>
 
-        {/* Rechtliches */}
         <div>
           <h3 className="text-sm font-display font-semibold uppercase tracking-widest text-foreground mb-4">
             Rechtliches
           </h3>
           <ul className="space-y-3">
-            <li>
-              <Link to="/impressum" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                Impressum
-              </Link>
-            </li>
-            <li>
-              <Link to="/datenschutz" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                Datenschutzerklärung
-              </Link>
-            </li>
-            <li>
-              <Link to="/agb" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                AGB
-              </Link>
-            </li>
+            <li><Link to="/impressum" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Impressum</Link></li>
+            <li><Link to="/datenschutz" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Datenschutzerklärung</Link></li>
           </ul>
         </div>
       </div>
@@ -75,12 +56,8 @@ const Footer = () => (
           © {new Date().getFullYear()} CarWorlds GmbH. Alle Rechte vorbehalten.
         </p>
         <div className="flex gap-6">
-          <Link to="/impressum" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
-            Impressum
-          </Link>
-          <Link to="/datenschutz" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
-            Datenschutz
-          </Link>
+          <Link to="/impressum" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Impressum</Link>
+          <Link to="/datenschutz" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Datenschutz</Link>
         </div>
       </div>
     </div>
