@@ -4,6 +4,9 @@ import { ArrowRight, ChevronLeft, ChevronRight, Fuel, Gauge, Users, X, Calendar,
 
 import bmwM4Cabrio1 from "@/assets/bmw-m4-cabrio-1.jpg";
 import bmwM4Cabrio3 from "@/assets/bmw-m4-cabrio-3.jpg";
+import bmwM4Cabrio5 from "@/assets/bmw-m4-cabrio-5.jpg";
+import bmwM4Cabrio6 from "@/assets/bmw-m4-cabrio-6.jpg";
+import bmwM4Cabrio7 from "@/assets/bmw-m4-cabrio-7.jpg";
 import mercedesC63_1 from "@/assets/mercedes-c63-1.jpg";
 import mercedesC63_2 from "@/assets/mercedes-c63-2.jpg";
 import bmwM4CoupeGelb from "@/assets/bmw-m4-coupe-gelb.jpg";
@@ -18,7 +21,7 @@ const vehicles = [
     priceDay: "249€",
     priceWeekend: "329€",
     weekendDeal: "699€ Fr–So (450 km frei)",
-    images: [bmwM4Cabrio1, bmwM4Cabrio3],
+    images: [bmwM4Cabrio6, bmwM4Cabrio5, bmwM4Cabrio7, bmwM4Cabrio1, bmwM4Cabrio3],
     tags: ["530 PS", "Allrad", "Cabrio", "Automatik"],
     specs: [
       { icon: Gauge, value: "530 PS" },
