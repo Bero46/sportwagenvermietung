@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Send, Phone, Mail, MapPin, Calendar as CalendarIcon, User, Car, MessageSquare } from "lucide-react";
+import { Send, Phone, Mail, MapPin, Calendar as CalendarIcon, User, Car, MessageSquare, ShieldCheck } from "lucide-react";
 import { format } from "date-fns";
 import { de } from "date-fns/locale";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 
@@ -27,6 +29,7 @@ const ContactForm = () => {
   });
   const [dateFrom, setDateFrom] = useState<Date>();
   const [dateTo, setDateTo] = useState<Date>();
+  const [privacy, setPrivacy] = useState(false);
   const [sending, setSending] = useState(false);
 
   const update = (field: string, value: string) =>
@@ -36,6 +39,10 @@ const ContactForm = () => {
     e.preventDefault();
     if (!form.name || !form.phone || !form.vehicle || !dateFrom) {
       toast({ title: "Bitte fülle alle Pflichtfelder aus.", variant: "destructive" });
+      return;
+    }
+    if (!privacy) {
+      toast({ title: "Bitte stimme der Datenschutzerklärung zu.", variant: "destructive" });
       return;
     }
     setSending(true);
@@ -52,31 +59,31 @@ const ContactForm = () => {
   };
 
   return (
-    <section id="kontakt" className="py-24 bg-card/30">
+    <section id="kontakt" className="py-16 sm:py-24 bg-card/30">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-12"
         >
-          <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">Kontakt</p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold mb-4">
+          <p className="text-xs sm:text-sm font-medium tracking-widest uppercase text-primary mb-2 sm:mb-3">Kontakt</p>
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-display font-bold mb-3 sm:mb-4">
             Deine <span className="text-gradient">Anfrage</span>
           </h2>
-          <p className="text-muted-foreground max-w-lg mx-auto">
+          <p className="text-sm sm:text-base text-muted-foreground max-w-lg mx-auto px-2">
             Wähle dein Wunschfahrzeug, Zeitraum und sende uns eine Anfrage – wir melden uns schnell.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-5 sm:gap-8 max-w-6xl mx-auto">
           {/* Form */}
           <motion.form
             onSubmit={handleSubmit}
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-3 glass rounded-2xl p-8 space-y-5"
+            className="lg:col-span-3 glass rounded-2xl p-5 sm:p-8 space-y-4 sm:space-y-5"
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <InputField icon={User} label="Name *" value={form.name} onChange={(v) => update("name", v)} placeholder="Max Mustermann" />
@@ -125,10 +132,27 @@ const ContactForm = () => {
               />
             </div>
 
+            {/* DSGVO Checkbox */}
+            <div className="flex items-start gap-3">
+              <Checkbox
+                id="privacy"
+                checked={privacy}
+                onCheckedChange={(checked) => setPrivacy(checked === true)}
+                className="mt-0.5"
+              />
+              <label htmlFor="privacy" className="text-xs text-muted-foreground leading-relaxed cursor-pointer">
+                Ich habe die{" "}
+                <Link to="/datenschutz" target="_blank" className="text-primary hover:underline font-medium">
+                  Datenschutzerklärung
+                </Link>{" "}
+                gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage zu. *
+              </label>
+            </div>
+
             <button
               type="submit"
-              disabled={sending}
-              className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-8 py-4 text-base font-semibold text-primary-foreground hover:opacity-90 transition-opacity shadow-glow disabled:opacity-50"
+              disabled={sending || !privacy}
+              className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-8 py-4 text-base font-semibold text-primary-foreground hover:opacity-90 transition-opacity shadow-glow disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Send className="h-5 w-5" />
               Anfrage per WhatsApp senden
