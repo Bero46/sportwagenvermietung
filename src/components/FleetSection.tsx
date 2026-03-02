@@ -83,21 +83,21 @@ const FleetSection = () => {
 
   return (
     <>
-      <section id="fahrzeuge" className="py-24 bg-background">
+      <section id="fahrzeuge" className="py-16 sm:py-24 bg-background">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-6"
+            className="text-center mb-5 sm:mb-6"
           >
-            <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
+            <p className="text-xs sm:text-sm font-medium tracking-widest uppercase text-primary mb-2 sm:mb-3">
               Unsere Flotte
             </p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold mb-4">
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-display font-bold mb-3 sm:mb-4">
               Handverlesene <span className="text-gradient">Premium-Fahrzeuge</span>
             </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto">
+            <p className="text-sm sm:text-base text-muted-foreground max-w-xl mx-auto px-2">
               Echte Fahrzeuge, echte Bilder. Alle Fahrer und Fahrzeuge sind vollkasko versichert.
             </p>
           </motion.div>
@@ -107,21 +107,21 @@ const FleetSection = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="flex flex-wrap justify-center gap-3 mb-12"
+            className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-12"
           >
             {[
               { icon: Shield, text: "Vollkasko inkl." },
               { icon: Calendar, text: "Mindestalter 21 Jahre" },
               { icon: Route, text: "Extra-km: 1,50€" },
             ].map((b) => (
-              <span key={b.text} className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/30 px-4 py-2 text-xs font-medium text-secondary-foreground">
-                <b.icon className="h-3.5 w-3.5 text-primary" />
+              <span key={b.text} className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-border bg-secondary/30 px-3 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-xs font-medium text-secondary-foreground">
+                <b.icon className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-primary" />
                 {b.text}
               </span>
             ))}
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-8">
             {vehicles.map((vehicle, index) => (
               <VehicleCard
                 key={vehicle.name}
@@ -183,18 +183,20 @@ const VehicleCard = ({ vehicle, index, onImageClick }: VehicleCardProps) => {
           />
         </AnimatePresence>
 
-        {/* Image nav */}
+        {/* Image nav - always visible on mobile */}
         {hasMultiple && (
           <>
             <button
               onClick={(e) => { e.stopPropagation(); setCurrentImg((p) => (p - 1 + vehicle.images.length) % vehicle.images.length); }}
-              className="absolute left-3 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full glass flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+              className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 h-8 w-8 sm:h-8 sm:w-8 rounded-full glass flex items-center justify-center opacity-70 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity"
+              aria-label="Vorheriges Bild"
             >
               <ChevronLeft className="h-4 w-4 text-foreground" />
             </button>
             <button
               onClick={(e) => { e.stopPropagation(); setCurrentImg((p) => (p + 1) % vehicle.images.length); }}
-              className="absolute right-3 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full glass flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+              className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 h-8 w-8 sm:h-8 sm:w-8 rounded-full glass flex items-center justify-center opacity-70 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity"
+              aria-label="Nächstes Bild"
             >
               <ChevronRight className="h-4 w-4 text-foreground" />
             </button>
@@ -205,48 +207,44 @@ const VehicleCard = ({ vehicle, index, onImageClick }: VehicleCardProps) => {
                   key={i}
                   onClick={(e) => { e.stopPropagation(); setCurrentImg(i); }}
                   className={`h-1.5 rounded-full transition-all ${i === currentImg ? "w-6 bg-primary" : "w-1.5 bg-foreground/40"}`}
+                  aria-label={`Bild ${i + 1}`}
                 />
               ))}
             </div>
           </>
         )}
 
-        {/* Click hint */}
-        <div className="absolute top-3 left-3 rounded-full glass px-3 py-1 text-[10px] font-medium text-secondary-foreground opacity-0 group-hover:opacity-100 transition-opacity">
-          Klicken für Vollbild
-        </div>
-
         {/* Price badge */}
         <div className="absolute top-3 right-3">
-          <span className="rounded-full bg-primary px-4 py-1.5 text-sm font-bold text-primary-foreground shadow-glow">
+          <span className="rounded-full bg-primary px-3 py-1 sm:px-4 sm:py-1.5 text-xs sm:text-sm font-bold text-primary-foreground shadow-glow">
             ab {vehicle.priceDay}/Tag
           </span>
         </div>
       </div>
 
       {/* Content */}
-      <div className="p-6">
-        <h3 className="text-xl font-display font-bold text-foreground mb-1">
+      <div className="p-4 sm:p-6">
+        <h3 className="text-lg sm:text-xl font-display font-bold text-foreground mb-1">
           {vehicle.name}
         </h3>
-        <p className="text-sm text-muted-foreground mb-3">{vehicle.subtitle}</p>
+        <p className="text-xs sm:text-sm text-muted-foreground mb-3">{vehicle.subtitle}</p>
 
         {/* Specs row */}
-        <div className="flex gap-4 mb-4">
+        <div className="flex gap-3 sm:gap-4 mb-3 sm:mb-4">
           {vehicle.specs.map((spec) => (
-            <div key={spec.value} className="flex items-center gap-1.5 text-xs text-muted-foreground">
-              <spec.icon className="h-3.5 w-3.5 text-primary" />
+            <div key={spec.value} className="flex items-center gap-1.5 text-[11px] sm:text-xs text-muted-foreground">
+              <spec.icon className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-primary" />
               {spec.value}
             </div>
           ))}
         </div>
 
         {/* Tags */}
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
           {vehicle.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full border border-border bg-secondary/50 px-3 py-1 text-xs font-medium text-muted-foreground"
+              className="rounded-full border border-border bg-secondary/50 px-2.5 py-0.5 sm:px-3 sm:py-1 text-[10px] sm:text-xs font-medium text-muted-foreground"
             >
               {tag}
             </span>
@@ -254,7 +252,7 @@ const VehicleCard = ({ vehicle, index, onImageClick }: VehicleCardProps) => {
         </div>
 
         {/* Price details */}
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground mb-4 border-t border-border pt-4">
+        <div className="flex flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-1 text-[11px] sm:text-xs text-muted-foreground mb-3 sm:mb-4 border-t border-border pt-3 sm:pt-4">
           {vehicle.priceWeekend && (
             <span>Wochenende: <strong className="text-foreground">{vehicle.priceWeekend}/Tag</strong></span>
           )}

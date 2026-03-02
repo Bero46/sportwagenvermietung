@@ -31,7 +31,7 @@ const Navbar = () => {
       layout
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
-      <div className="flex items-center justify-between h-14 px-4 lg:px-6">
+      <div className="flex items-center justify-between h-14 px-3 sm:px-4 lg:px-6">
         <Link to="/" className="flex items-center gap-2">
           <img src={logo} alt="ZB-Rental Logo" className="h-8 w-auto" />
         </Link>

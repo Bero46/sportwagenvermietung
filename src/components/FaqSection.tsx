@@ -42,19 +42,19 @@ const faqs = [
 ];
 
 const FaqSection = () => (
-  <section id="faq" className="py-24 bg-card/30">
+  <section id="faq" className="py-16 sm:py-24 bg-card/30">
     <div className="container mx-auto px-4 max-w-3xl">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center mb-16"
+        className="text-center mb-10 sm:mb-16"
       >
-        <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">FAQ</p>
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold mb-4">
+        <p className="text-xs sm:text-sm font-medium tracking-widest uppercase text-primary mb-2 sm:mb-3">FAQ</p>
+        <h2 className="text-2xl sm:text-4xl lg:text-5xl font-display font-bold mb-3 sm:mb-4">
           Häufige Fragen
         </h2>
-        <p className="text-muted-foreground">Kurz & klar – wenn was offen ist, schreib uns.</p>
+        <p className="text-sm sm:text-base text-muted-foreground">Kurz & klar – wenn was offen ist, schreib uns.</p>
       </motion.div>
 
       <motion.div
